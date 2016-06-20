@@ -152,6 +152,11 @@ SimpleTokenAuthentication.configure do |config|
   # If false, users must provide their authentication token and email at every request.
   # config.sign_in_token = false
 
+  # Configure the token timeout policy
+  # If nil the token will not timeout
+  # If set to an integer the token will timeout in that many minutes
+  # config.token_timeout = nil
+
   # Configure the name of the HTTP headers watched for authentication.
   #
   # Default header names for a given token authenticatable entity follow the pattern:

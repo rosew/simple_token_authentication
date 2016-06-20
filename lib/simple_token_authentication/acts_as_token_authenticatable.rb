@@ -21,6 +21,9 @@ module SimpleTokenAuthentication
     def ensure_authentication_token
       if authentication_token.blank?
         self.authentication_token = generate_authentication_token(token_generator)
+        if has_attribute? :authentication_token_created_at
+          self.authentication_token_created_at = Time.now
+        end
       end
     end
 

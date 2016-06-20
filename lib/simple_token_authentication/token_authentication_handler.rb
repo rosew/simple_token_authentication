@@ -39,9 +39,17 @@ module SimpleTokenAuthentication
       fallback_handler.fallback!(self, entity)
     end
 
+    def authentication_token_is_current(record)
+      return true if SimpleTokenAuthentication.token_timeout.nil?
+
+      timeout_time = record.authentication_token_created_at + SimpleTokenAuthentication.token_timeout.minutes
+      timeout_time > Time.now
+    end
+
     def token_correct?(record, entity, token_comparator)
-      record && token_comparator.compare(record.authentication_token,
-                                         entity.get_token_from_params_or_headers(self))
+      record && authentication_token_is_current(record) &&
+        token_comparator.compare(record.authentication_token,
+                                 entity.get_token_from_params_or_headers(self))
     end
 
     def perform_sign_in!(record, sign_in_handler)

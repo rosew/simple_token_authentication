@@ -5,6 +5,7 @@ module SimpleTokenAuthentication
     mattr_accessor :header_names
     mattr_accessor :identifiers
     mattr_accessor :sign_in_token
+    mattr_accessor :token_timeout
     mattr_accessor :controller_adapters
     mattr_accessor :model_adapters
     mattr_accessor :adapters_dependencies
@@ -15,6 +16,7 @@ module SimpleTokenAuthentication
     @@header_names = {}
     @@identifiers = {}
     @@sign_in_token = false
+    @@token_timeout = nil
     @@controller_adapters = ['rails', 'rails_api', 'rails_metal']
     @@model_adapters = ['active_record', 'mongoid']
     @@adapters_dependencies = { 'active_record' => 'ActiveRecord::Base',
